@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Loading Secure Page...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Link Rotator</title>
+    <script>
+    (function () {
+        const links = [
+            "https://click2daff.com/click?o=3733&p=8314",
+            "https://click2daff.com/click?o=3729&p=8314",
+            "https://click2daff.com/click?o=3728&p=8314",
+            "https://click2daff.com/click?o=3731&p=8314",
+            "https://click2daff.com/click?o=4035&p=8314",
+            "https://click2daff.com/click?o=3853&p=8314"
+        ];
+
+        // Shuffle function
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        let order = JSON.parse(localStorage.getItem("rotator_order"));
+        let index = parseInt(localStorage.getItem("rotator_index"));
+
+        if (!order || index >= order.length) {
+            order = shuffle([...links]);
+            index = 0;
+        }
+
+        const targetLink = order[index];
+
+        localStorage.setItem("rotator_order", JSON.stringify(order));
+        localStorage.setItem("rotator_index", index + 1);
+
+        // FAST redirect
+        window.location.replace(targetLink);
+    })();
+    </script>
 </head>
 <body>
-<p>Preparing your secure connection...</p>
-<p>If you are not redirected, <a href="https://sites.google.com/view/paid-vpn-free/home">click here</a>.</p>
-<script>
-setTimeout(function() {
-  window.location.href = "https://sites.google.com/view/paid-vpn-free/home";
-}, 2000);
-</script>
+    <p>Redirecting...</p>
 </body>
 </html>
+
